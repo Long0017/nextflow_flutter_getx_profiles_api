@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:nextflow_flutter_getx_profiles_api/models/profile_model/profile_model.dart';
 
@@ -15,6 +17,14 @@ class ProfileController extends GetxController {
         .get("https://651d740c44e393af2d59d2b4.mockapi.io/api/profiles");
 
     print(response.body);
+
+    var convertJson = response.body.map((data) {
+      // print(data);
+      var profileModel = ProfileModel.fromMap(data);
+      return profileModel;
+    });
+
+    profiles = List<ProfileModel>.from(convertJson);
 
     loading.value = false;
   }
