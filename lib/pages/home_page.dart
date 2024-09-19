@@ -20,7 +20,21 @@ class HomePage extends StatelessWidget {
         if (controller.loading.value == true) {
           return Center(child: CircularProgressIndicator());
         } else {
-          return Text("Finish.");
+          var profiles = controller.profiles;
+
+          return ListView.builder(
+            itemCount: profiles.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                title: Text(profiles[index].name!),
+                subtitle: Text(profiles[index].phone!),
+                onTap: () {
+                  print(profiles[index].name);
+                  print(profiles[index].phone);
+                },
+              );
+            },
+          );
         }
       }),
     );
